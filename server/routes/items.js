@@ -12,6 +12,14 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:itemId", async (req, res, next) => {
+  try {
+    const item = await Item.findByPk(req.params.itemId);
+    res.send(item);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 // POST new item
 router.post("/", async (req, res, next) => {
@@ -20,6 +28,17 @@ router.post("/", async (req, res, next) => {
     res.status(201).json(newItem);
   } catch (error) {
     next(error);
+  }
+});
+
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const item = await Item.findByPk(req.params.id);
+    await item.destroy();
+    const items = await Item.findAll();
+    res.send(items);
+  } catch (e) {
+    next(e);
   }
 });
 
