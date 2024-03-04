@@ -2,6 +2,15 @@ const express = require("express");
 const router = express.Router();
 const { Item } = require("../models");
 
+// Middleware
+const { check, validationResult } = require("express-validator");
+router.use(express.json());
+router.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+
 // GET all items
 router.get("/", async (req, res, next) => {
   try {
@@ -28,6 +37,17 @@ router.post("/", async (req, res, next) => {
     res.status(201).json(newItem);
   } catch (error) {
     next(error);
+  }
+});
+
+router.put("/:id", async (req, res, next) => {
+  try {
+    const item = await Item.findByPk(req.params.id);
+    console.log(item);
+    const updatedItem = await item.update(req.body);
+    res.json(updatedItem);
+  } catch (e) {
+    next(e);
   }
 });
 
