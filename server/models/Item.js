@@ -10,6 +10,6 @@ const Item = sequelize.define("items", {
     image: Sequelize.STRING,
   });
   
-  module.exports = Item;
+  module.exports = Item
 
   
