@@ -21,6 +21,16 @@ router.get("/:itemId", async (req, res, next) => {
   }
 });
 
+// POST new item
+router.post("/", async (req, res, next) => {
+  try {
+    const newItem = await Item.create(req.body);
+    res.status(201).json(newItem);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.delete("/:id", async (req, res, next) => {
   try {
     const item = await Item.findByPk(req.params.id);
