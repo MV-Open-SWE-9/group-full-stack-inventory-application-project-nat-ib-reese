@@ -31,4 +31,10 @@ describe("/items tests", () => {
       })
     );
   });
+
+  test("should delete the item with the given id", async () => {
+    await request(app).delete("/api/items/1");
+    const deletedItem = await Item.findByPk(1);
+    expect(deletedItem).toBeNull();
+  });
 });
