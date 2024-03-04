@@ -12,6 +12,7 @@ const seed = async () => {
         // insert data
         await Promise.all(sauces.map(sauce => Sauce.create(sauce)));
 
+       
         console.log("db populated!");
     } catch (error) {
         console.error(error);
