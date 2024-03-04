@@ -2,7 +2,6 @@ const request = require("supertest");
 const app = require("./app");
 const seed = require("./seed");
 const { Item } = require("./models/index");
-const { items } = require("./seedData");
 
 let itemQuantity;
 
@@ -42,7 +41,7 @@ describe("/items tests", () => {
 
   test("PUT /items/:id", async () => {
    
-    return await request(app).put("/api/items/2")
+    const res = await request(app).put("/api/items/2")
     .send({
       name: "Cellphone",
       price:1300,
@@ -50,13 +49,18 @@ describe("/items tests", () => {
       category: "electronics",
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsK7HCOaiG0un0K9msFAOz6rSnIMgVnovEdQ&usqp=CAU"
     })
-    let newItemQuantity = items.length;
-    expect(newItemQuantity).toEqual(itemQuantity+1)
+    expect(res.body).toEqual(
+      expect.objectContaining({
+        name: "Cellphone",
+        price: 1300,
+      })
+    );
   });
 
 
 
   test("POST /items", async () => {
+   
     return await request(app).put("/api/items/")
     .send({
       name: "apple vision pro",
@@ -65,11 +69,7 @@ describe("/items tests", () => {
       category: "electronics",
       image: "https://i.blogs.es/5ebc23/captura-de-pantalla-2023-06-05-a-las-20.22.35-p.-m./1366_2000.jpeg",
     })
-    expect(res.body).toEqual(
-      expect.objectContaining({
-        name: "Cellphone",
-        price: 1300,
-      })
-    );
+    let newItemQuantity = items.length;
+    expect(newItemQuantity).toEqual(itemQuantity+1)
   });
 });
