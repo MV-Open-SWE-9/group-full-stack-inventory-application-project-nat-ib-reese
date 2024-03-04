@@ -37,4 +37,23 @@ describe("/items tests", () => {
     const deletedItem = await Item.findByPk(1);
     expect(deletedItem).toBeNull();
   });
+
+
+  test("PUT /items/:id", async () => {
+   
+    return await request(app).put("/api/items/2")
+    .send({
+      name: "Cellphone",
+      price:1300,
+      description:"this is an apple iphone",
+      category: "electronics",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsK7HCOaiG0un0K9msFAOz6rSnIMgVnovEdQ&usqp=CAU"
+    })
+    expect(res.body).toEqual(
+      expect.objectContaining({
+        name: "Cellphone",
+        price: 1300,
+      })
+    );
+  });
 });
