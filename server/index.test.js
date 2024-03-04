@@ -14,7 +14,7 @@ beforeAll(async () => {
 
 describe("/items tests", () => {
   test("GET /items", async () => {
-    const response = await request(app).get("/items");
+    const response = await request(app).get("/api/items");
     expect(response.body).toContainEqual(
       expect.objectContaining({
         name: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -23,7 +23,7 @@ describe("/items tests", () => {
   });
 
   test("GET /items/:id", async () => {
-    const response = await request(app).get("/items/1");
+    const response = await request(app).get("/api/items/1");
     expect(response.body).toEqual(
       expect.objectContaining({
         name: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
