@@ -31,14 +31,18 @@ export const App = () => {
 
   return (
     <main>
-      <h1>Sauce Store</h1>
-      <p onClick={addItemHandler} className="btn">
-        Add item
-      </p>
-      <p onClick={editItemHandler} className="btn">
-        Edit item
-      </p>
-      <h2>All items</h2>
+      <div className="header-container">
+        <h1 className="header">Our Store</h1>
+        <div className="header-btns">
+          <p onClick={addItemHandler} className="btn">
+            Add item
+          </p>
+          <p onClick={editItemHandler} className="btn">
+            Edit item
+          </p>
+        </div>
+      </div>
+      <h2 className="page-heading">All items</h2>
       <ItemsList items={items} />
     </main>
   );
