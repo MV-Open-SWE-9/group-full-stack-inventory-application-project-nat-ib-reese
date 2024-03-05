@@ -1,33 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { SaucesList } from './SaucesList';
+import React, { useState, useEffect } from "react";
+import { ItemsList } from "./ItemsList";
 
 // import and prepend the api url to any fetch calls
-import apiURL from '../api';
+import apiURL from "../api";
 
 export const App = () => {
+  const [items, setItems] = useState([]);
 
-	const [sauces, setSauces] = useState([]);
+  async function fetchItems() {
+    try {
+      const response = await fetch(`${apiURL}/items`);
+      const itemsData = await response.json();
 
-	async function fetchSauces(){
-		try {
-			const response = await fetch(`${apiURL}/sauces`);
-			const saucesData = await response.json();
-			
-			setSauces(saucesData);
-		} catch (err) {
-			console.log("Oh no an error! ", err)
-		}
-	}
+      setItems(itemsData);
+    } catch (err) {
+      console.log("Oh no an error! ", err);
+    }
+  }
 
-	useEffect(() => {
-		fetchSauces();
-	}, []);
+  useEffect(() => {
+    fetchItems();
+  }, []);
 
-	return (
-		<main>	
+  function addItemHandler() {
+    console.log("add item");
+  }
+  function editItemHandler() {
+    console.log("edit item");
+  }
+
+  return (
+    <main>
       <h1>Sauce Store</h1>
-			<h2>All things 🔥</h2>
-			<SaucesList sauces={sauces} />
-		</main>
-	)
-}
+      <p onClick={addItemHandler} className="btn">
+        Add item
+      </p>
+      <p onClick={editItemHandler} className="btn">
+        Edit item
+      </p>
+      <h2>All items</h2>
+      <ItemsList items={items} />
+    </main>
+  );
+};
