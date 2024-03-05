@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { Item } from "./Item";
 import apiURL from "../api";
 import { ItemInfo } from "./ItemInfo";
+import {EditItemForm} from "./EditItemForm"
 
 export const ItemsList = ({ items, viewItem, setViewItem }) => {
   const [item, setItem] = useState([]);
@@ -20,20 +21,18 @@ export const ItemsList = ({ items, viewItem, setViewItem }) => {
       const response = await fetch(`${apiURL}/items/${viewItem}`);
       const item1 = await response.json();
       setItem(item1);
-      console.log(item1);
     } catch (err) {
       console.log("Oh no an error! ", err);
     }
   }
   useEffect(() => {
     fetchItem(viewItem);
-  }, [viewItem]);
-  console.log(viewItem);
+  }, [viewItem, editItem]);
+  
 
   return (
     <>
-      {!viewItem ? (
-        items.map((item) => (
+      {editItem ? <EditItemForm key={item.id} item={item}/> : !viewItem ? items.map((item) => (
           <Item
             key={item.id}
             item={item}
@@ -41,16 +40,9 @@ export const ItemsList = ({ items, viewItem, setViewItem }) => {
             setViewItem={setViewItem}
             setEditItem={setEditItem}
             fetchItem={fetchItem}
-          />
-        ))
-      ) : (
-        <ItemInfo
-          key={item.id}
-          setViewItem={setViewItem}
-          fetchItem={fetchItem}
-          item={item}
-        />
-      )}
+          /> )):
+              }
+
     </>
   );
 };
