@@ -8,7 +8,7 @@ import apiURL from "../api";
 export const App = () => {
   const [items, setItems] = useState([]);
   const [addItemForm, setAddItemForm] = useState(false);
-  console.log(addItemForm);
+  const [viewItem, setViewItem] = useState("");
 
   async function fetchItems() {
     try {
@@ -25,6 +25,11 @@ export const App = () => {
     fetchItems();
   }, []);
 
+  function goHomeHandler() {
+    setAddItemForm(false);
+    setViewItem(false);
+  }
+
   function addItemHandler() {
     setAddItemForm(true);
   }
@@ -32,7 +37,9 @@ export const App = () => {
   return (
     <main>
       <div className="header-container">
-        <h1 className="header">Our Store</h1>
+        <h1 onClick={goHomeHandler} className="header">
+          Our Store
+        </h1>
         <div className="header-btns">
           <p onClick={addItemHandler} className="btn">
             Add item
@@ -40,11 +47,19 @@ export const App = () => {
         </div>
       </div>
       <div className="page">
-        <h2 className="page-heading">All items</h2>
-         {!addItemForm && <ItemsList items={items} />}
-      {addItemForm && (
-        <AddItemForm setAddItemForm={setAddItemForm} fetchItems={fetchItems} />
-      )}
+        {!addItemForm && (
+          <ItemsList
+            viewItem={viewItem}
+            setViewItem={setViewItem}
+            items={items}
+          />
+        )}
+        {addItemForm && (
+          <AddItemForm
+            setAddItemForm={setAddItemForm}
+            fetchItems={fetchItems}
+          />
+        )}
       </div>
     </main>
   );
