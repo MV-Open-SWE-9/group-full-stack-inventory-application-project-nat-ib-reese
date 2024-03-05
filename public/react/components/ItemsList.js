@@ -6,6 +6,7 @@ import { ItemInfo } from "./ItemInfo";
 export const ItemsList = ({ items, viewItem, setViewItem }) => {
   const [item, setItem] = useState([]);
   const [editItem, setEditItem] = useState([]);
+
   function deleteItemHandler() {
     console.log("delete");
   }
@@ -43,7 +44,12 @@ export const ItemsList = ({ items, viewItem, setViewItem }) => {
           />
         ))
       ) : (
-        <ItemInfo key={item.id} fetchItem={fetchItem} item={item} />
+        <ItemInfo
+          key={item.id}
+          setViewItem={setViewItem}
+          fetchItem={fetchItem}
+          item={item}
+        />
       )}
     </>
   );
