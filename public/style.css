@@ -1,5 +1,94 @@
 * {
   margin: 0;
   box-sizing: border-box;
-  background-color: rgb(223, 223, 223);
+  background-color: rgb(245, 245, 245);
+  font-family: "Montserrat", sans-serif;
+}
+
+/* GENERAL */
+
+.page-heading {
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: rgb(51, 51, 50);
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: rgb(23, 23, 23);
+}
+
+.page {
+  margin: 0 5rem 5rem 5rem;
+}
+
+/* HOMEPAGE */
+
+.header-container {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header {
+  font-size: 30px;
+}
+
+.header-btns {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* ITEM IN LIST */
+.item-container {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-bottom: 1px solid grey;
+  margin-right: 4rem;
+  margin-left: 4rem;
+}
+
+.item-container img {
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.item__img-title-container {
+  display: flex;
+  gap: 25px;
+}
+
+.item-name {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.item-category {
+  font-weight: 400;
+  color: rgb(80, 80, 80);
+}
+
+.item-price {
+  text-align: end;
+  margin-bottom: 10px;
+}
+
+.delete-btn {
+  margin-bottom: 10px;
 }

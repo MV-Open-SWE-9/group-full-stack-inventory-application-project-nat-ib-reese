@@ -28,24 +28,24 @@ export const App = () => {
   function addItemHandler() {
     setAddItemForm(true);
   }
-  function editItemHandler() {
-    console.log("edit item");
-  }
 
   return (
     <main>
-      <h1>Sauce Store</h1>
-      <p onClick={addItemHandler} className="btn">
-        Add item
-      </p>
-      <p onClick={editItemHandler} className="btn">
-        Edit item
-      </p>
-      <h2>All items</h2>
-      {!addItemForm && <ItemsList items={items} />}
+      <div className="header-container">
+        <h1 className="header">Our Store</h1>
+        <div className="header-btns">
+          <p onClick={addItemHandler} className="btn">
+            Add item
+          </p>
+        </div>
+      </div>
+      <div className="page">
+        <h2 className="page-heading">All items</h2>
+         {!addItemForm && <ItemsList items={items} />}
       {addItemForm && (
         <AddItemForm setAddItemForm={setAddItemForm} fetchItems={fetchItems} />
       )}
+      </div>
     </main>
   );
 };
