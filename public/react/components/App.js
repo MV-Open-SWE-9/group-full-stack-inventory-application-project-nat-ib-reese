@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { ItemsList } from "./ItemsList";
-import { AddItemForm } from "./AddItemForm"
+import { AddItemForm } from "./AddItemForm";
 
 // import and prepend the api url to any fetch calls
 import apiURL from "../api";
 
 export const App = () => {
   const [items, setItems] = useState([]);
+  const [addItemForm, setAddItemForm] = useState(false);
+  console.log(addItemForm);
 
   async function fetchItems() {
     try {
@@ -24,7 +26,7 @@ export const App = () => {
   }, []);
 
   function addItemHandler() {
-    console.log("add item");
+    setAddItemForm(true);
   }
   function editItemHandler() {
     console.log("edit item");
@@ -40,7 +42,10 @@ export const App = () => {
         Edit item
       </p>
       <h2>All items</h2>
-      <ItemsList items={items} />
+      {!addItemForm && <ItemsList items={items} />}
+      {addItemForm && (
+        <AddItemForm setAddItemForm={setAddItemForm} fetchItems={fetchItems} />
+      )}
     </main>
   );
 };
