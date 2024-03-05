@@ -25,9 +25,6 @@ export const App = () => {
   function addItemHandler() {
     console.log("add item");
   }
-  function editItemHandler() {
-    console.log("edit item");
-  }
 
   return (
     <main>
@@ -37,13 +34,12 @@ export const App = () => {
           <p onClick={addItemHandler} className="btn">
             Add item
           </p>
-          <p onClick={editItemHandler} className="btn">
-            Edit item
-          </p>
         </div>
       </div>
-      <h2 className="page-heading">All items</h2>
-      <ItemsList items={items} />
+      <div className="page">
+        <h2 className="page-heading">All items</h2>
+        <ItemsList className="page" items={items} />
+      </div>
     </main>
   );
 };
