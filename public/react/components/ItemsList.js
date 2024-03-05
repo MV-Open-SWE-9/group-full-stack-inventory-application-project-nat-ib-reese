@@ -21,7 +21,7 @@ export const ItemsList = ({ items }) => {
             </div>
           </div>
           <div className="item__price-delete">
-            <p className="item-price">${item.price}</p>
+            <p className="item-price">${item.price.toFixed(2)}</p>
             <p onClick={deleteItemHandler} className="btn delete-btn">
               Delete item
             </p>
