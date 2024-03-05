@@ -20,7 +20,7 @@ export const EditItemForm = ({item}) => {
         // console.log(email)
         // console.log(tags)
         // console.log(e.target.value)
-        const articleData = {
+        const itemData = {
             name: name, 
             category: category, 
             description: description, 
@@ -35,7 +35,7 @@ export const EditItemForm = ({item}) => {
                 "Content-Type": 'application/json'
             }, 
             body: JSON.stringify(
-                articleData
+              itemData
             )
         })
         const data = await res.json()

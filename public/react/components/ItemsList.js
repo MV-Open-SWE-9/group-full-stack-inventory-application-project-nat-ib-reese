@@ -18,13 +18,19 @@ export const ItemsList = ({ items }) => {
     console.log("edit item");
   }
 
-  async function fetchItem(viewItem) {
+  async function fetchItem(viewItem, editItem) {
     try {
+      if(viewItem){
         const response = await fetch(`${apiURL}/items/${viewItem}`);
         const item1 = await response.json();
         setItem(item1)
         console.log(item1)
-      
+      } else if(editItem){
+        const response = await fetch(`${apiURL}/items/${editItem}`);
+        const item1 = await response.json();
+        setEditItem(item1)
+        console.log(item1)
+      }
     
       
     } catch (err) {
