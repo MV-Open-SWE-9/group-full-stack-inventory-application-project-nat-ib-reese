@@ -2,67 +2,100 @@ import React, { useState } from "react";
 import apiURL from "../api";
 
 export const AddItemForm = ({ setAddItemForm, fetchItems }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    price: "",
-    category: "",
-    image: "",
-  });
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [image, setImage] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  console.log(name);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setAddItemForm(false);
+
     const response = await fetch(`${apiURL}/items`, {
       method: "POST",
-      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        description: description,
+        price: price,
+        category: category,
+        image: image,
+      }),
     });
     fetchItems();
+
+    setName("");
+    setPrice("");
+    setCategory("");
+    setDescription("");
+    setImage("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        value={formData.name}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="description"
-        placeholder="Description"
-        value={formData.description}
-        onChange={handleChange}
-      />
-      <input
-        type="number"
-        name="price"
-        placeholder="Price"
-        value={formData.price}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="category"
-        placeholder="Category"
-        value={formData.category}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="image"
-        placeholder="Image URL"
-        value={formData.image}
-        onChange={handleChange}
-      />
-      <button type="submit">Add Item</button>
-    </form>
+    <>
+      <h2 className="page-heading">Add Item</h2>
+      <div className="form">
+        <form onSubmit={handleSubmit}>
+          <label>Name</label>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            required
+          />
+
+          <label>Description</label>
+          <input
+            type="text"
+            name="description"
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+            required
+          />
+
+          <label>Price</label>
+          <input
+            type="number"
+            name="price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+
+          <label>Category</label>
+          <input
+            type="text"
+            name="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          />
+
+          <label>Image (url)</label>
+          <input
+            type="text"
+            name="image"
+            placeholder="Image URL"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            required
+          />
+
+          <button className="btn" type="submit">
+            Add Item
+          </button>
+        </form>
+      </div>
+    </>
   );
 };

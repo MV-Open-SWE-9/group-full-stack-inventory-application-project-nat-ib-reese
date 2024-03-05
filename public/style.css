@@ -21,6 +21,7 @@
   cursor: pointer;
   transition: 0.25s;
   text-align: center;
+  border: none;
 }
 
 .btn:hover {
@@ -41,6 +42,7 @@
 }
 
 .header {
+  cursor: pointer;
   font-size: 30px;
 }
 
@@ -91,4 +93,13 @@
 
 .delete-btn {
   margin-bottom: 10px;
+}
+
+/* FORM */
+.form {
+  display: flex;
+}
+
+label {
+  font-size: 20px;
 }

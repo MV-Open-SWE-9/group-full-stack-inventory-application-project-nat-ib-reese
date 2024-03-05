@@ -35,6 +35,7 @@ export const ItemsList = ({ items }) => {
 
   return (
     <>
+
       {!viewItem ? items.map((item) => (
         <Item key={item.id} item={item} onClick={editItemHandler} setViewItem={setViewItem} setEditItem={setEditItem}/ >
       )): 
