@@ -1,13 +1,12 @@
-import {React, useState, useEffect} from "react";
-import {Item} from "./Item"
+import { React, useState, useEffect } from "react";
+import { Item } from "./Item";
 import apiURL from "../api";
 import { ItemInfo } from "./ItemInfo";
-export const ItemsList = ({ items }) => {
 
+export const ItemsList = ({ items, viewItem, setViewItem }) => {
+  const [item, setItem] = useState([]);
+  const [editItem, setEditItem] = useState([]);
 
-  const [viewItem, setViewItem] = useState("")
-  const [item, setItem]= useState([])
-  const [editItem, setEditItem] = useState([])
   function deleteItemHandler() {
     console.log("delete");
   }
@@ -20,9 +19,8 @@ export const ItemsList = ({ items }) => {
     try {
       const response = await fetch(`${apiURL}/items/${viewItem}`);
       const item1 = await response.json();
-      setItem(item1)
-      console.log(item1)
-      
+      setItem(item1);
+      console.log(item1);
     } catch (err) {
       console.log("Oh no an error! ", err);
     }
@@ -30,18 +28,29 @@ export const ItemsList = ({ items }) => {
   useEffect(() => {
     fetchItem(viewItem);
   }, [viewItem]);
-  console.log(viewItem)
-  
+  console.log(viewItem);
 
   return (
     <>
-
-      {!viewItem ? items.map((item) => (
-        <Item key={item.id} item={item} onClick={editItemHandler} setViewItem={setViewItem} setEditItem={setEditItem}/ >
-      )): 
-        
-        <ItemInfo key={item.id} item={item}/>
-      }
+      {!viewItem ? (
+        items.map((item) => (
+          <Item
+            key={item.id}
+            item={item}
+            onClick={editItemHandler}
+            setViewItem={setViewItem}
+            setEditItem={setEditItem}
+            fetchItem={fetchItem}
+          />
+        ))
+      ) : (
+        <ItemInfo
+          key={item.id}
+          setViewItem={setViewItem}
+          fetchItem={fetchItem}
+          item={item}
+        />
+      )}
     </>
   );
 };

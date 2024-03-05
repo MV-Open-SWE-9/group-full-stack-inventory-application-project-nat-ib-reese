@@ -8,6 +8,7 @@ import apiURL from "../api";
 export const App = () => {
   const [items, setItems] = useState([]);
   const [addItemForm, setAddItemForm] = useState(false);
+  const [viewItem, setViewItem] = useState("");
 
   async function fetchItems() {
     try {
@@ -26,6 +27,7 @@ export const App = () => {
 
   function goHomeHandler() {
     setAddItemForm(false);
+    setViewItem(false);
   }
 
   function addItemHandler() {
@@ -45,7 +47,13 @@ export const App = () => {
         </div>
       </div>
       <div className="page">
-        {!addItemForm && <ItemsList items={items} />}
+        {!addItemForm && (
+          <ItemsList
+            viewItem={viewItem}
+            setViewItem={setViewItem}
+            items={items}
+          />
+        )}
         {addItemForm && (
           <AddItemForm
             setAddItemForm={setAddItemForm}
