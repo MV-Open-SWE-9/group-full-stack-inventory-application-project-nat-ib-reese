@@ -12,11 +12,13 @@ export const Item = ({ item, setViewItem, setEditItem, fetchItem }) => {
 
   return (
     <>
-      <div onClick={viewItem} key={item.id} className="item-container">
+      <div key={item.id} className="item-container">
         <div className="item__img-title-container">
           <img src={item.image} alt={item.name} />
           <div className="item__titles">
-            <h3 className="item-name">{item.name}</h3>
+            <h3 onClick={viewItem} className="item-name">
+              {item.name}
+            </h3>
             <p className="item-category">{item.category}</p>
           </div>
         </div>

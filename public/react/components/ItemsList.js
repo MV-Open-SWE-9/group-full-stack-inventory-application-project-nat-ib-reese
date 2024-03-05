@@ -9,10 +9,8 @@ export const ItemsList = ({ items }) => {
 export const ItemsList = ({ items, viewItem, setViewItem }) => {
   const [item, setItem] = useState([]);
   const [editItem, setEditItem] = useState([]);
-
   const [viewItem, setViewItem] = useState("")
-  const [item, setItem]= useState([])
-  const [editItem, setEditItem] = useState([])
+
   function deleteItemHandler() {
     console.log("delete");
   }
