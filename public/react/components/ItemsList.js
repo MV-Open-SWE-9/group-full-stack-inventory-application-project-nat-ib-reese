@@ -1,6 +1,13 @@
-import React from "react";
-
+import {React, useState, useEffect} from "react";
+import {Item} from "./Item"
+import apiURL from "../api";
+import { ItemInfo } from "./ItemInfo";
 export const ItemsList = ({ items }) => {
+
+
+  const [viewItem, setViewItem] = useState("")
+  const [item, setItem]= useState([])
+  const [editItem, setEditItem] = useState([])
   function deleteItemHandler() {
     console.log("delete");
   }
@@ -9,29 +16,32 @@ export const ItemsList = ({ items }) => {
     console.log("edit item");
   }
 
+  async function fetchItem(viewItem) {
+    try {
+      const response = await fetch(`${apiURL}/items/${viewItem}`);
+      const item1 = await response.json();
+      setItem(item1)
+      console.log(item1)
+      
+    } catch (err) {
+      console.log("Oh no an error! ", err);
+    }
+  }
+  useEffect(() => {
+    fetchItem(viewItem);
+  }, [viewItem]);
+  console.log(viewItem)
+  
+
   return (
     <>
-      <h2 className="page-heading">All items</h2>
-      {items.map((item) => (
-        <div key={item.id} className="item-container">
-          <div className="item__img-title-container">
-            <img src={item.image} alt={item.name} />
-            <div className="item__titles">
-              <h3 className="item-name">{item.name}</h3>
-              <p className="item-category">{item.category}</p>
-            </div>
-          </div>
-          <div className="item__price-delete">
-            <p className="item-price">${item.price}</p>
-            <p onClick={deleteItemHandler} className="btn delete-btn">
-              Delete item
-            </p>
-            <p onClick={editItemHandler} className="btn">
-              Edit item
-            </p>
-          </div>
-        </div>
-      ))}
+
+      {!viewItem ? items.map((item) => (
+        <Item key={item.id} item={item} onClick={editItemHandler} setViewItem={setViewItem} setEditItem={setEditItem}/ >
+      )): 
+        
+        <ItemInfo key={item.id} item={item}/>
+      }
     </>
   );
 };
