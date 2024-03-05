@@ -4,6 +4,7 @@ const { Item } = require("../models");
 
 // Middleware
 const { check, validationResult } = require("express-validator");
+const { error } = require("console");
 router.use(express.json());
 router.use(
   express.urlencoded({
@@ -31,14 +32,29 @@ router.get("/:itemId", async (req, res, next) => {
 });
 
 // POST new item
-router.post("/", async (req, res, next) => {
-  try {
-    const newItem = await Item.create(req.body);
-    res.status(201).json(newItem);
-  } catch (error) {
-    next(error);
+router.post(
+  "/",
+  [
+    check("name").not().isEmpty(),
+    check("price").not().isEmpty(),
+    check("description").not().isEmpty(),
+    check("category").not().isEmpty(),
+    check("image").not().isEmpty(),
+  ],
+  async (req, res, next) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        res.json({ error: errors.array() });
+      }
+
+      const newItem = await Item.create(req.body);
+      res.status(201).json(newItem);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 router.put("/:id", async (req, res, next) => {
   try {
