@@ -23,7 +23,7 @@ export const Item = ({ item, setViewItem, setEditItem, fetchItem }) => {
           </div>
         </div>
         <div className="item__price-delete">
-          <p className="item-price">${item.price}</p>
+          <p className="item-price">${Number(item.price).toFixed(2)}</p>
           <p className="btn delete-btn">Delete item</p>
           <p onClick={editItem} className="btn">
             Edit item

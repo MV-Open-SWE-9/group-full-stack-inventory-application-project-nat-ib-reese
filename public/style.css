@@ -97,12 +97,24 @@
 }
 
 /* FORM */
-.form {
+form {
   display: flex;
+  flex-direction: column;
 }
 
 label {
   font-size: 20px;
+  margin-bottom: 5px;
+}
+
+form input {
+  padding: 6px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+form button {
+  margin-top: 10px;
 }
 
 /* ITEM DETAIL */
