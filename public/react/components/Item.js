@@ -1,7 +1,12 @@
 import React from "react";
 import { useState } from "react";
-
-export const Item = ({ item, setViewItem, setEditItem, fetchItem }) => {
+export const Item = ({
+  item,
+  setViewItem,
+  setEditItem,
+  fetchItem,
+  deleteItemHandler,
+}) => {
   const viewItem = (e) => {
     setViewItem(item.id);
   };
@@ -23,8 +28,13 @@ export const Item = ({ item, setViewItem, setEditItem, fetchItem }) => {
           </div>
         </div>
         <div className="item__price-delete">
-          <p className="item-price">${Number(item.price).toFixed(2)}</p>
-          <p className="btn delete-btn">Delete item</p>
+          <p className="item-price">${Number(item.price)}</p>
+          <p
+            className="btn delete-btn"
+            onClick={() => deleteItemHandler(item.id)}
+          >
+            Delete item
+          </p>
           <p onClick={editItem} className="btn">
             Edit item
           </p>
