@@ -4,12 +4,19 @@ import apiURL from "../api";
 import { ItemInfo } from "./ItemInfo";
 import { EditItemForm } from "./EditItemForm";
 
-export const ItemsList = ({ items }) => {
+export const ItemsList = ({ items, fetchItems }) => {
   const [viewItem, setViewItem] = useState("");
   const [item, setItem] = useState([]);
   const [editItem, setEditItem] = useState("");
-  function deleteItemHandler() {
-    console.log("delete");
+  
+  
+  async function deleteItemHandler(itemId) {
+    const response = await fetch(`${apiURL}/items/${itemId}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      await fetchItems();
+    }
   }
 
   function editItemHandler() {
@@ -33,6 +40,7 @@ export const ItemsList = ({ items }) => {
       console.log("Oh no an error! ", err);
     }
   }
+
   useEffect(() => {
     fetchItem(viewItem);
     fetchItem(editItem);
@@ -51,6 +59,7 @@ export const ItemsList = ({ items }) => {
             onClick={editItemHandler}
             setViewItem={setViewItem}
             setEditItem={setEditItem}
+            deleteItemHandler={deleteItemHandler}
           />
         ))
       ) : (

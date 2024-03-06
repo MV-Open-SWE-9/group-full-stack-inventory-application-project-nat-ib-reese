@@ -52,6 +52,7 @@ export const App = () => {
             viewItem={viewItem}
             setViewItem={setViewItem}
             items={items}
+            fetchItems={fetchItems}
           />
         )}
         {addItemForm && (
