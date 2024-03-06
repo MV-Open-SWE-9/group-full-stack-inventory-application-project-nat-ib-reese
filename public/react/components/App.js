@@ -28,6 +28,7 @@ export const App = () => {
   function goHomeHandler() {
     setAddItemForm(false);
     setViewItem(false);
+    window.location.reload(false)
   }
 
   function addItemHandler() {

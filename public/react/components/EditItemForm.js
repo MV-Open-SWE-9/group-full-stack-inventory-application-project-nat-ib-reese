@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import apiURL from "../api";
 
-export const EditItemForm = ({ item }) => {
+export const EditItemForm = ({ item, setEditItem}) => {
   const [name, setName] = useState(item.name);
   const [category, setCategory] = useState(item.category);
   const [description, setDescription] = useState(item.description);
@@ -27,6 +27,9 @@ export const EditItemForm = ({ item }) => {
       body: JSON.stringify(itemData),
     });
     const data = await res.json();
+
+    window.location.reload(false)
+  
   };
   return (
     <>

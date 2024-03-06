@@ -50,7 +50,7 @@ export const ItemsList = ({ items, fetchItems }) => {
   return (
     <>
       {editItem ? (
-        <EditItemForm key={item.id} item={item} />
+        <EditItemForm key={item.id} item={item}  setEditItem={setEditItem}/>
       ) : !viewItem ? (
         items.map((item) => (
           <Item
