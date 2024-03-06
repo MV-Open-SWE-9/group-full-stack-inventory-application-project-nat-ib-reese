@@ -103,14 +103,16 @@ form {
 }
 
 label {
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 5px;
 }
 
 form input {
-  padding: 6px;
+  padding: 8px;
   border-radius: 10px;
   margin-bottom: 15px;
+  background-color: lightgray;
+  border: none;
 }
 
 form button {
