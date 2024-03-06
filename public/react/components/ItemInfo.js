@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-export const ItemInfo = ({ setViewItem, item }) => {
+export const ItemInfo = ({ item, setViewItem }) => {
   function backHandler() {
     setViewItem(false);
   }

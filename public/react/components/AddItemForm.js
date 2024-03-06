@@ -85,7 +85,6 @@ export const AddItemForm = ({ setAddItemForm, fetchItems }) => {
           <input
             type="text"
             name="image"
-            placeholder="Image URL"
             value={image}
             onChange={(e) => setImage(e.target.value)}
             required
