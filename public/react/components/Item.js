@@ -4,7 +4,6 @@ export const Item = ({
   item,
   setViewItem,
   setEditItem,
-  fetchItem,
   deleteItemHandler,
 }) => {
   const viewItem = (e) => {
