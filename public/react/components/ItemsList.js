@@ -19,9 +19,6 @@ export const ItemsList = ({ items, fetchItems }) => {
     }
   }
 
-  function editItemHandler() {
-    console.log("edit item");
-  }
 
   async function fetchItem(viewItem, editItem) {
     try {
@@ -45,7 +42,7 @@ export const ItemsList = ({ items, fetchItems }) => {
     fetchItem(viewItem);
     fetchItem(editItem);
   }, [viewItem, editItem]);
-  console.log(viewItem);
+
 
   return (
     <>
@@ -56,7 +53,6 @@ export const ItemsList = ({ items, fetchItems }) => {
           <Item
             key={item.id}
             item={item}
-            onClick={editItemHandler}
             setViewItem={setViewItem}
             setEditItem={setEditItem}
             deleteItemHandler={deleteItemHandler}

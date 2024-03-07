@@ -27,7 +27,6 @@ export const EditItemForm = ({ item, setEditItem}) => {
       body: JSON.stringify(itemData),
     });
     const data = await res.json();
-
     window.location.reload(false)
   
   };
